@@ -1,0 +1,63 @@
+📌 Dynamic Memory Allocation (DMA) in C++
+🔹 Definition
+
+Dynamic Memory Allocation (DMA) is the process of allocating memory at runtime (while the program is running), instead of compile time.
+
+Normal arrays (e.g., int arr[10];) have fixed size decided at compile time.
+
+DMA lets the program decide how much memory to use based on user input or program logic.
+
+🔹 new and delete
+
+new → allocates memory from the heap (dynamic memory area).
+
+delete → releases the memory back to the system to prevent memory leaks.
+
+Example:
+
+int* arr = new int[size];   // allocate array on heap
+...
+delete[] arr;               // free memory
+
+🔹 Stack vs Heap
+
+Stack memory:
+
+Automatic allocation.
+
+Memory is released when the function ends.
+
+Example: int arr[10];
+
+Heap memory:
+
+Manual allocation using new.
+
+Stays allocated until we delete it.
+
+Example: int* arr = new int[size];
+
+🔹 Advantages of DMA
+
+Memory can be allocated based on runtime needs.
+
+Avoids waste (no need to reserve too much upfront).
+
+Useful for large arrays/structures.
+
+🔹 Common Mistakes
+
+Forgetting delete → memory leak (unused memory not released).
+
+Using memory after delete → dangling pointer (dangerous).
+
+Mixing delete and delete[]:
+
+delete ptr; → for single variables.
+
+delete[] ptr; → for arrays.
+
+✅ In short:
+DMA gives flexibility by allowing memory to be allocated during runtime, but it requires responsible cleanup using delete to avoid memory leaks.
+
+Would you like me to also prepare a side-by-side comparison (static

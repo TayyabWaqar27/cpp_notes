@@ -60,4 +60,4 @@ delete[] ptr; → for arrays.
 ✅ In short:
 DMA gives flexibility by allowing memory to be allocated during runtime, but it requires responsible cleanup using delete to avoid memory leaks.
 
-Would you like me to also prepare a side-by-side comparison (static
+

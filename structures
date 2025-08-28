@@ -1,0 +1,200 @@
+1. What is a Structure?
+
+A struct is a user-defined data type that groups related variables (of different data types) under one name.
+
+Syntax:
+
+struct Student {
+    string name;
+    int age;
+    int marks;
+};
+
+
+Create objects:
+
+Student s1, s2;
+
+2. Accessing Members
+
+Use the dot operator (.):
+
+s1.name = "Ali";
+s1.age = 20;
+s1.marks = 85;
+
+3. Array of Structures
+
+Store multiple records:
+
+Student s[3];   // array of 3 students
+
+
+Input/Output in a loop:
+
+for(int i=0; i<3; i++){
+    cin >> s[i].name >> s[i].age >> s[i].marks;
+}
+
+4. Nested Structures
+
+A structure can contain another structure:
+
+struct Address {
+    string city;
+    string country;
+};
+
+struct Student {
+    string name;
+    int age;
+    int marks;
+    Address add;
+};
+
+
+Access:
+
+s1.add.city = "Lahore";
+s1.add.country = "Pakistan";
+
+5. Structures with Functions
+
+You can pass structures to functions for reusability.
+
+(a) Pass Structure to Function
+void printStudent(Student s){
+    cout << s.name << " " << s.age << " " << s.marks;
+}
+
+(b) Return Structure from Function
+Student getTopper(Student s[], int size){
+    Student topper = s[0];
+    for(int i=1; i<size; i++){
+        if(s[i].marks > topper.marks)
+            topper = s[i];
+    }
+    return topper;
+}
+
+(c) Update Values
+void updateMarks(Student s[], int size, string name, int newMarks){
+    for(int i=0; i<size; i++){
+        if(s[i].name == name){
+            s[i].marks = newMarks;
+        }
+    }
+}
+
+6. Key Points
+
+struct is like a lightweight class (default access = public).
+
+Useful for grouping related data.
+
+Can be combined with arrays, functions, and even nested structures.
+
+A stepping stone to Classes & Objects in OOP.  
+
+Here is a code who cover the whole 
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Nested Structure
+struct Address {
+    string city;
+    string country;
+};
+
+// Main Structure
+struct Student {
+    string name;
+    int age;
+    int marks;
+    Address add;
+};
+
+// Function to input multiple students
+void inputStudents(Student s[], int size) {
+    cout << "\nEnter details of students:\n";
+    for (int i = 0; i < size; i++) {
+        cout << "\nStudent " << i + 1 << ":\n";
+        cout << "Name: ";
+        cin >> s[i].name;
+        cout << "Age: ";
+        cin >> s[i].age;
+        cout << "Marks: ";
+        cin >> s[i].marks;
+        cout << "City: ";
+        cin >> s[i].add.city;
+        cout << "Country: ";
+        cin >> s[i].add.country;
+    }
+}
+
+// Function to print details of a student
+void printStudent(Student s) {
+    cout << "\nName: " << s.name;
+    cout << "\nAge: " << s.age;
+    cout << "\nMarks: " << s.marks;
+    cout << "\nCity: " << s.add.city;
+    cout << "\nCountry: " << s.add.country;
+    cout << "\n-------------------";
+}
+
+// Function to find topper
+Student findTopper(Student s[], int size) {
+    Student topper = s[0];
+    for (int i = 1; i < size; i++) {
+        if (s[i].marks > topper.marks) {
+            topper = s[i];
+        }
+    }
+    return topper;
+}
+
+// Function to update marks
+void updateMarks(Student s[], int size) {
+    string name;
+    int newMarks;
+    cout << "\nEnter student name to update marks: ";
+    cin >> name;
+    cout << "Enter new marks: ";
+    cin >> newMarks;
+
+    for (int i = 0; i < size; i++) {
+        if (s[i].name == name) {
+            s[i].marks = newMarks;
+            cout << "\nMarks updated successfully!";
+            printStudent(s[i]);
+            return;
+        }
+    }
+    cout << "\nStudent not found!";
+}
+
+int main() {
+    int size;
+    cout << "Enter number of students: ";
+    cin >> size;
+
+    Student s[size];
+    inputStudents(s, size);
+
+    // Find and display topper
+    Student topper = findTopper(s, size);
+    cout << "\nTopper of the class is: ";
+    printStudent(topper);
+
+    // Update marks
+    int choice;
+    cout << "\nDo you want to update marks? (1 = Yes / 0 = No): ";
+    cin >> choice;
+    if (choice == 1) {
+        updateMarks(s, size);
+    }
+
+    return 0;
+}

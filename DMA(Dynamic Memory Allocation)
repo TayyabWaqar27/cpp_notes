@@ -121,6 +121,67 @@ int main() {
     delete[] names;  // free memory
     return 0;
 }
+Why Not Just Use Arrays?
+
+Fixed Size (at compile time)
+
+Arrays in C++ must have their size known before running the program.
+
+Example:
+
+int arr[100]; // fixed size
+
+
+If you need only 40 elements, 60 remain wasted. If you need 200, it won’t work.
+
+Memory Wastage
+
+Declaring a big array just in case leads to wasted stack memory.
+
+Stack vs Heap
+
+Normal arrays are stored in the stack, which is limited (usually a few MBs).
+
+Large arrays can cause a stack overflow.
+
+DMA uses the heap, which is much larger and better for handling big data.
+
+Runtime Flexibility
+
+Arrays require size at compile time (or before main starts, if using const).
+
+DMA lets the user decide at runtime how much memory is needed.
+
+Array Limitations
+
+Arrays cannot be resized once created.
+
+If you need a growing/shrinking collection, arrays won’t help.
+
+DMA (or better, vector) can handle variable size.
+
+Example of Problem with Arrays
+int main() {
+    int n;
+    cin >> n;   // user input
+    int arr[n]; // ❌ Error in standard C++, size must be constant
+}
+
+
+This works in some compilers (like GCC, as an extension), but not standard C++.
+With DMA:
+
+int *arr = new int[n];  // ✅ Works, size given at runtime
+delete[] arr;
+
+
+✅ Conclusion
+
+We don’t always use arrays because they are static, fixed in size, and stored on stack.
+
+DMA gives flexibility, scalability, and avoids wastage.
+
+For modern C++, prefer vector over raw arrays and DMA for safety and ease.
 
 
 ✅ Summary

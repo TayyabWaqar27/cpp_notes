@@ -56,6 +56,82 @@ Mixing delete and delete[]:
 delete ptr; → for single variables.
 
 delete[] ptr; → for arrays.
+Use of DMA
+
+Dynamic Memory Allocation (DMA) means allocating memory at runtime (when the program is running), instead of compile-time. In C++, DMA is done using the operators new and delete.
+
+Why do we use DMA?
+
+Avoid memory wastage
+
+In static arrays, we must fix the size before running the program.
+
+If we declare string names[1000]; but use only 40, the rest is wasted.
+
+With DMA, we allocate only what is needed.
+
+Flexibility at runtime
+
+Memory size can be decided during program execution based on user input.
+
+Heap storage
+
+DMA stores data in the heap memory, which is much larger than stack memory.
+
+Useful for large arrays or objects.
+
+Manual memory control
+
+We can create and destroy memory as needed.
+
+Prevents unnecessary memory usage.
+
+Syntax
+// Single variable
+int *p = new int; 
+*p = 10;
+delete p;  
+
+// Array
+int *arr = new int[5];  
+delete[] arr;
+
+Example
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Enter number of students: ";
+    cin >> n;
+
+    string *names = new string[n];  // allocate exact memory
+
+    for (int i = 0; i < n; i++) {
+        cout << "Enter name of student " << i + 1 << ": ";
+        cin >> names[i];
+    }
+
+    cout << "\nList of students:\n";
+    for (int i = 0; i < n; i++) {
+        cout << names[i] << endl;
+    }
+
+    delete[] names;  // free memory
+    return 0;
+}
+
+
+✅ Summary
+
+DMA helps when size is unknown at compile time.
+
+Saves memory by allocating only what is needed.
+
+Data stored in heap, released using delete.
+
+In modern C++, it’s recommended to use vector, string, smart pointers instead of raw new/delete.
 
 ✅ In short:
 DMA gives flexibility by allowing memory to be allocated during runtime, but it requires responsible cleanup using delete to avoid memory leaks.
